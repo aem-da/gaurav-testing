@@ -1,38 +1,16 @@
 /* =========================================================
-   HERO BLOCK
-   ========================================================= */
-
-:root {
-  --hero-height: min(92vh, 820px);
-
-  --hero-overlay:
-    linear-gradient(
-      90deg,
-      rgba(0, 0, 0, 0.78) 0%,
-      rgba(0, 0, 0, 0.58) 38%,
-      rgba(0, 0, 0, 0.34) 58%,
-      rgba(0, 0, 0, 0.7) 100%
-    );
-
-  --hero-accent: #facc15;
-
-  --hero-cta-bg: transparent;
-  --hero-cta-fg: #ffffff;
-  --hero-cta-border: rgba(255, 255, 255, 0.75);
-}
-
-/* =========================================================
-   CONTAINER FIXES
+   HERO BLOCK — EXACT LAYOUT FOR PROVIDED HTML
    ========================================================= */
 
 .hero-container {
   padding: 0 !important;
+  margin: 0 !important;
 }
 
 .hero-container .hero-wrapper {
-  max-width: unset;
-  padding: 0;
-  width: 100%;
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
 .hero.block {
@@ -43,146 +21,108 @@
 }
 
 /* =========================================================
-   VIEWPORT
+   SINGLE HERO SLIDE
    ========================================================= */
 
-.hero .hero-viewport {
+.hero.block > div {
   position: relative;
+
   width: 100%;
-  height: var(--hero-height);
+  min-height: 520px;
+
+  display: flex;
+  align-items: center;
+
   overflow: hidden;
-  background: #0f172a;
+
+  background: #21479b;
 }
 
 /* =========================================================
-   TRACK
+   BACKGROUND IMAGE
    ========================================================= */
 
-.hero .hero-track {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-/* =========================================================
-   SLIDES
-   ========================================================= */
-
-.hero .hero-slide {
-  position: absolute;
-  inset: 0;
-
-  opacity: 0;
-  visibility: hidden;
-
-  transition:
-    opacity 0.8s ease,
-    visibility 0.8s ease;
-
-  pointer-events: none;
-}
-
-.hero .hero-slide.is-active {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-  z-index: 2;
-}
-
-/* =========================================================
-   MEDIA
-   ========================================================= */
-
-.hero .hero-media {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.hero .hero-media img,
-.hero .hero-media video,
-.hero .hero-media picture,
-.hero .hero-media picture img {
+.hero.block > div > div:first-child {
   position: absolute;
   inset: 0;
 
   width: 100%;
   height: 100%;
+}
+
+.hero.block > div > div:first-child picture,
+.hero.block > div > div:first-child img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
 
   object-fit: cover;
   object-position: center;
-
-  display: block;
 }
 
-/* =========================================================
-   OVERLAY
-   ========================================================= */
+/* dark overlay */
+.hero.block > div::before {
+  content: '';
 
-.hero .hero-overlay {
   position: absolute;
   inset: 0;
 
-  background: var(--hero-overlay);
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.72) 0%,
+      rgba(0, 0, 0, 0.45) 40%,
+      rgba(0, 0, 0, 0.2) 70%,
+      rgba(0, 0, 0, 0.55) 100%
+    );
 
-  display: flex;
-  align-items: flex-end;
-
-  padding:
-    0
-    clamp(24px, 5vw, 72px)
-    110px;
+  z-index: 1;
 }
 
 /* =========================================================
-   CONTENT
+   CONTENT WRAPPER
    ========================================================= */
 
-.hero .hero-content {
-  max-width: 1280px;
-  width: 100%;
-  margin: 0 auto;
-
-  color: #ffffff;
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-
-  gap: 22px;
+.hero.block > div > div:not(:first-child) {
+  position: relative;
+  z-index: 2;
 }
 
 /* =========================================================
    EYEBROW
    ========================================================= */
 
-.hero .hero-eyebrow {
-  position: relative;
+.hero.block > div > div:nth-child(2) {
+  position: absolute;
+
+  left: clamp(24px, 5vw, 84px);
+  bottom: 360px;
 
   display: inline-flex;
   align-items: center;
 
-  padding: 14px 22px 14px 42px;
+  padding: 14px 22px 14px 44px;
 
-  background: rgba(15, 23, 42, 0.72);
+  background: rgba(31, 41, 55, 0.78);
 
   backdrop-filter: blur(8px);
 
   border-radius: 999px;
 
+  color: #fff;
+
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-
-  color: #ffffff;
 }
 
-.hero .hero-eyebrow::before {
+.hero.block > div > div:nth-child(2)::before {
   content: '';
 
   position: absolute;
+
   left: 18px;
   top: 50%;
 
@@ -193,63 +133,92 @@
 
   border-radius: 50%;
 
-  background: var(--hero-accent);
+  background: #facc15;
+}
+
+.hero.block > div > div:nth-child(2) p {
+  margin: 0;
 }
 
 /* =========================================================
    TITLE
    ========================================================= */
 
-.hero .hero-title {
+.hero.block > div > div:nth-child(3) {
+  position: absolute;
+
+  left: clamp(24px, 5vw, 84px);
+  bottom: 175px;
+
+  z-index: 2;
+
+  max-width: 980px;
+}
+
+.hero.block > div > div:nth-child(3) p {
   margin: 0;
 
-  max-width: 11ch;
+  color: #fff;
 
-  font-size: clamp(3.2rem, 6vw, 6.4rem);
+  font-size: clamp(3.2rem, 6vw, 6.5rem);
   line-height: 0.95;
   font-weight: 300;
-  letter-spacing: -0.045em;
-
-  color: #ffffff;
-
-  text-wrap: balance;
+  letter-spacing: -0.05em;
 }
 
 /* =========================================================
    DESCRIPTION
    ========================================================= */
 
-.hero .hero-description {
+.hero.block > div > div:nth-child(4) {
+  position: absolute;
+
+  left: clamp(24px, 5vw, 84px);
+  bottom: 105px;
+
+  max-width: 720px;
+
+  z-index: 2;
+}
+
+.hero.block > div > div:nth-child(4) p {
   margin: 0;
 
-  max-width: 760px;
+  color: rgba(255, 255, 255, 0.92);
 
   font-size: clamp(1rem, 1.4vw, 1.3rem);
   line-height: 1.6;
   font-weight: 400;
-
-  color: rgba(255, 255, 255, 0.92);
 }
 
 /* =========================================================
    CTA
    ========================================================= */
 
-.hero .hero-cta {
+.hero.block > div > div:nth-child(5) {
+  position: absolute;
+
+  left: clamp(24px, 5vw, 84px);
+  bottom: 32px;
+
+  z-index: 2;
+}
+
+.hero.block > div > div:nth-child(5) p {
+  margin: 0;
+}
+
+.hero.block > div > div:nth-child(5) a {
   display: inline-flex;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
 
-  margin-top: 8px;
+  padding: 16px 30px;
 
-  padding: 16px 28px;
+  border: 1.5px solid rgba(255, 255, 255, 0.75);
 
-  background: var(--hero-cta-bg);
-
-  color: var(--hero-cta-fg);
-
-  border: 1.5px solid var(--hero-cta-border);
-  border-radius: 4px;
+  color: #fff;
+  background: transparent;
 
   text-decoration: none;
   text-transform: uppercase;
@@ -264,154 +233,70 @@
     transform 0.25s ease;
 }
 
-.hero .hero-cta:hover {
+.hero.block > div > div:nth-child(5) a:hover {
   background: rgba(255, 255, 255, 0.12);
-  border-color: #ffffff;
+
+  border-color: #fff;
 
   transform: translateY(-2px);
 }
 
-/* =========================================================
-   CTA ARROW
-   ========================================================= */
-
-.hero .hero-cta-arrow {
-  position: relative;
+/* arrow */
+.hero.block > div > div:nth-child(5) a::after {
+  content: '';
 
   width: 18px;
-  height: 10px;
+  height: 18px;
 
-  display: inline-block;
-}
+  border-top: 2px solid currentColor;
+  border-right: 2px solid currentColor;
 
-.hero .hero-cta-arrow::before,
-.hero .hero-cta-arrow::after {
-  content: '';
-  position: absolute;
-}
-
-.hero .hero-cta-arrow::before {
-  left: 0;
-  top: 50%;
-
-  width: 100%;
-  height: 1.5px;
-
-  background: currentColor;
-
-  transform: translateY(-50%);
-}
-
-.hero .hero-cta-arrow::after {
-  right: 0;
-  top: 50%;
-
-  width: 8px;
-  height: 8px;
-
-  border-top: 1.5px solid currentColor;
-  border-right: 1.5px solid currentColor;
-
-  transform: translateY(-50%) rotate(45deg);
+  transform: rotate(45deg);
 }
 
 /* =========================================================
-   PAGINATION
+   MOBILE
    ========================================================= */
 
-.hero .hero-pagination {
-  position: absolute;
-
-  right: clamp(24px, 5vw, 72px);
-  bottom: 42px;
-
-  display: flex;
-  gap: 8px;
-
-  z-index: 5;
-}
-
-.hero .hero-dot {
-  width: 34px;
-  height: 4px;
-
-  border: 0;
-  padding: 0;
-
-  background: rgba(255, 255, 255, 0.38);
-
-  cursor: pointer;
-
-  transition:
-    width 0.25s ease,
-    background 0.25s ease;
-}
-
-.hero .hero-dot:hover {
-  background: rgba(255, 255, 255, 0.7);
-}
-
-.hero .hero-dot.is-active {
-  width: 56px;
-  background: #ffffff;
-}
-
-/* =========================================================
-   RESPONSIVE
-   ========================================================= */
-
-@media (max-width: 899px) {
-  :root {
-    --hero-height: min(78vh, 680px);
+@media (max-width: 900px) {
+  .hero.block > div {
+    min-height: 680px;
   }
 
-  .hero .hero-overlay {
-    padding:
-      0
-      24px
-      96px;
+  .hero.block > div > div:nth-child(2) {
+    left: 24px;
+    right: 24px;
+    bottom: 390px;
+
+    width: fit-content;
+
+    font-size: 11px;
   }
 
-  .hero .hero-content {
-    gap: 18px;
+  .hero.block > div > div:nth-child(3) {
+    left: 24px;
+    right: 24px;
+    bottom: 220px;
   }
 
-  .hero .hero-title {
-    max-width: 100%;
-
-    font-size: clamp(2.5rem, 11vw, 4rem);
+  .hero.block > div > div:nth-child(3) p {
+    font-size: clamp(2.6rem, 12vw, 4.5rem);
     line-height: 1;
   }
 
-  .hero .hero-description {
+  .hero.block > div > div:nth-child(4) {
+    left: 24px;
+    right: 24px;
+    bottom: 125px;
+  }
+
+  .hero.block > div > div:nth-child(4) p {
     font-size: 1rem;
     line-height: 1.5;
   }
 
-  .hero .hero-pagination {
-    right: 24px;
-    bottom: 28px;
-  }
-
-  .hero .hero-dot {
-    width: 24px;
-  }
-
-  .hero .hero-dot.is-active {
-    width: 40px;
-  }
-}
-
-/* =========================================================
-   ACCESSIBILITY
-   ========================================================= */
-
-@media (prefers-reduced-motion: reduce) {
-  .hero .hero-slide {
-    transition: none;
-  }
-
-  .hero .hero-media video {
-    display: none;
+  .hero.block > div > div:nth-child(5) {
+    left: 24px;
+    bottom: 40px;
   }
 }
